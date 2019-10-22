@@ -1,0 +1,17 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
+    <ui:VisualElement name="screen" style="flex-grow: 1; flex-direction: row; justify-content: space-between;">
+        <Style path="Assets/MainMenu.uss" />
+        <ui:VisualElement name="left" style="align-items: flex-start; width: 150px; flex-grow: 1;" />
+        <ui:VisualElement name="center" style="justify-content: flex-start; width: 434px; flex-grow: 1; align-items: stretch;">
+            <ui:VisualElement name="center-top" style="height: 172px;" />
+            <ui:VisualElement name="logo" style="flex-direction: row; justify-content: space-around;">
+                <ui:VisualElement name="logo-left" style="align-items: flex-start; flex-grow: 1;" />
+                <ui:VisualElement name="logo-center" style="height: 310px; width: 448px; flex-grow: 1; background-image: url('/Assets/Implemented/Art/logo.png');" />
+                <ui:VisualElement name="logo-Right" style="flex-grow: 1;" />
+            </ui:VisualElement>
+            <ui:Button text="Button" name="start" />
+            <ui:Button text="Button" name="Quit" />
+        </ui:VisualElement>
+        <ui:VisualElement name="right" style="width: 150px; align-items: flex-end; flex-grow: 1;" />
+    </ui:VisualElement>
+</ui:UXML>
