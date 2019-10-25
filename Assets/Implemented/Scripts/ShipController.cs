@@ -10,7 +10,7 @@ public class ShipController : MonoBehaviour
     float engineForward;
     float EngineReverse;
     bool shoot;
-    [SerializeField] float maxSpeed = 600f;
+    [SerializeField] float maxSpeed = 200;
     [SerializeField] float showSpeed;
     [SerializeField] public enum SteeringType { Controller, Keyboard };
     [SerializeField] public SteeringType steeringType;
@@ -223,7 +223,7 @@ public class ShipController : MonoBehaviour
     /////////////////////////////////////////////
     public void ChangeController()
     {
-        if (controller.value == 1)
+        if (controller.value == 0)
         {
             steeringType = SteeringType.Keyboard;
             canvasK.gameObject.SetActive(true);
@@ -231,7 +231,7 @@ public class ShipController : MonoBehaviour
 
         }
 
-        if (controller.value == 0)
+        if (controller.value == 1)
         {
             steeringType = SteeringType.Controller;
             canvasK.gameObject.SetActive(false);

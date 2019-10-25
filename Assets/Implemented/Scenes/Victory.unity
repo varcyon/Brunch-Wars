@@ -521,14 +521,16 @@ MonoBehaviour:
   m_RepeatRate: 0.1
   m_ActionsAsset: {fileID: -944628639613478452, guid: 2f1598c77402d0d4795ba91ed81e1ac6,
     type: 3}
-  m_PointAction: {fileID: 0}
+  m_PointAction: {fileID: 1054132383583890850, guid: 2f1598c77402d0d4795ba91ed81e1ac6,
+    type: 3}
   m_MoveAction: {fileID: -2250188739719683950, guid: 2f1598c77402d0d4795ba91ed81e1ac6,
     type: 3}
   m_SubmitAction: {fileID: 2064916234097673511, guid: 2f1598c77402d0d4795ba91ed81e1ac6,
     type: 3}
   m_CancelAction: {fileID: -1967631576421560919, guid: 2f1598c77402d0d4795ba91ed81e1ac6,
     type: 3}
-  m_LeftClickAction: {fileID: 0}
+  m_LeftClickAction: {fileID: 8056856818456041789, guid: 2f1598c77402d0d4795ba91ed81e1ac6,
+    type: 3}
   m_MiddleClickAction: {fileID: 0}
   m_RightClickAction: {fileID: 0}
   m_ScrollWheelAction: {fileID: 0}
@@ -547,7 +549,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 947308838}
+  m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
 --- !u!4 &738660205
