@@ -102,4 +102,6 @@ public class RoomController : MonoBehaviourPunCallbacks
         PhotonNetwork.LeaveLobby();
         StartCoroutine(rejoinLobby());
     }
+
+    
 }

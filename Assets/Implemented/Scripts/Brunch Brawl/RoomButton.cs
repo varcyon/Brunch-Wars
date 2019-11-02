@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-public class RoomButton : MonoBehaviour {
+public class RoomButton : MonoBehaviourPunCallbacks {
 
     [SerializeField]
     private TextMeshProUGUI nameText; //display for room name

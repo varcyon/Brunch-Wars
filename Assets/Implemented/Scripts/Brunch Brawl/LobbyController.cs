@@ -61,13 +61,17 @@ public class LobbyController : MonoBehaviourPunCallbacks
         mainPanel.SetActive(false);
         lobbyPanel.SetActive(true);
         PhotonNetwork.JoinLobby(); //First tries to join a lobby
+        Debug.Log("Joining lobby");
     }
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList) //Once in lobby this function is called every time there is an update to the room list
     {
+        Debug.Log("IN On Room list update");
+        Debug.Log(roomList.Count);
         int tempIndex;
         foreach (RoomInfo room in roomList) //loop through each room in room list
         {
+            Debug.Log(room);
             if (roomListings != null) //try to find existing room listing
             {
                 tempIndex = roomListings.FindIndex(ByName(room.Name)); 
@@ -85,6 +89,7 @@ public class LobbyController : MonoBehaviourPunCallbacks
             {
                 roomListings.Add(room);
                 ListRoom(room);
+                Debug.Log(room);
             }
         }
     }
@@ -105,6 +110,7 @@ public class LobbyController : MonoBehaviourPunCallbacks
             GameObject tempListing = Instantiate(roomListingPrefab, roomsContainer);
             RoomButton tempButton = tempListing.GetComponent<RoomButton>();
             tempButton.SetRoom(room.Name, room.MaxPlayers, room.PlayerCount);
+            Debug.Log(room.Name+ room.MaxPlayers + room.PlayerCount);
         }
     }
 

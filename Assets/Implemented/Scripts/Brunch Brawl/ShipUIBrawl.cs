@@ -36,9 +36,7 @@ public class ShipUIBrawl : MonoBehaviourPun
     // Update is called once per frame
     void Update()
     {
-        if (photonView.IsMine)
-        {
-
+        
             if (ShipControllerBrawl.Instance == null)
             { return; }
 
@@ -54,7 +52,7 @@ public class ShipUIBrawl : MonoBehaviourPun
             {
                 miniMap.SetActive(false);
             }
-        }
+        
 
     }
 }

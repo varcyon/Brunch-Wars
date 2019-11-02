@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 113718714710770817}
-  - component: {fileID: -110631196740578150}
   - component: {fileID: 3762421744640393887}
+  - component: {fileID: 4850309305868166593}
   m_Layer: 0
   m_Name: PhotonPlayer
   m_TagString: Untagged
@@ -32,20 +32,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-110631196740578150
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1158471748000326794}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14d9e23b496a7dd448542a38cc700274, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShipPrefab: {fileID: 4479617575606587634, guid: c56adf84a01f4b84aaf7bbb1c0792bb4,
-    type: 3}
 --- !u!114 &3762421744640393887
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68,3 +54,17 @@ MonoBehaviour:
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &4850309305868166593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1158471748000326794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48ba35a64ba68e643b4463dd4a7e1442, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShipPrefab: {fileID: 4479617575606587634, guid: c56adf84a01f4b84aaf7bbb1c0792bb4,
+    type: 3}

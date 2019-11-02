@@ -18,7 +18,7 @@ public class MenuManager : MonoBehaviour
     }
     public void GoToBrawl()
     {
-        SceneManager.LoadScene("Brunch Brawl Lobby");
+        SceneManager.LoadScene(9);
     }
     public void GoToMain()
     {

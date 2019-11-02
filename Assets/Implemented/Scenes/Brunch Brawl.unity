@@ -212,11 +212,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 158232944}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1be3459f6f7cd846943f56bc14a3139, type: 3}
+  m_Script: {fileID: 11500000, guid: 52e7e18a36877004e82bbb721b1cf17c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playership: {fileID: 4479617575606587634, guid: c56adf84a01f4b84aaf7bbb1c0792bb4,
-    type: 3}
+  playership: {fileID: 0}
   virtualCam: {fileID: 387882825}
 --- !u!4 &158232947
 Transform:

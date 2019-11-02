@@ -240,12 +240,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4479617575606587636}
   - component: {fileID: 4479617575606587638}
-  - component: {fileID: -4340494886867869514}
   - component: {fileID: 8683459439242137122}
   - component: {fileID: 1412905853178672070}
   - component: {fileID: 1047011052667019277}
   - component: {fileID: 1223397916747601360}
-  - component: {fileID: 4851243112353196255}
+  - component: {fileID: 7113540576408388306}
   m_Layer: 0
   m_Name: ShipMP
   m_TagString: Player
@@ -304,24 +303,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &-4340494886867869514
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4479617575606587634}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 221d321c215dc854f92a4783ec308547, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 20
-  currentHealth: 0
-  recovering: 0
-  recoveryCounter: 0
-  recoveryTime: 2
-  deathParticles: {fileID: 0}
 --- !u!61 &8683459439242137122
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -401,7 +382,7 @@ MonoBehaviour:
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
---- !u!114 &4851243112353196255
+--- !u!114 &7113540576408388306
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -410,7 +391,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4479617575606587634}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81586145d512a2e4cb7fe41ee4622816, type: 3}
+  m_Script: {fileID: 11500000, guid: 8c16ca3c6dd5f194bb95f8ca7180dfa2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   name: {fileID: 7663053170445075265}
@@ -442,18 +423,18 @@ MonoBehaviour:
   jamPoint6: {fileID: 8676951360198512974}
   jamPoint7: {fileID: 8905643133538891089}
   jamPoint8: {fileID: 7305827697944776715}
-  attackTimer: 0.35
+  attackTimer: 1
   hotSauce: 0
-  HotSauseActive: 15
+  HotSauseActive: 5
   HotSauseActiveCur: 0
   jam: 0
-  jamActive: 15
+  jamActive: 5
   jamActiveCur: 0
   blueBerry: 0
   blueBerryActive: 5
   blueBerryActiveCur: 0
   donut: 0
-  donutActive: 10
+  donutActive: 5
   donutActiveCur: 0
 --- !u!1 &4537635825834025046
 GameObject:
