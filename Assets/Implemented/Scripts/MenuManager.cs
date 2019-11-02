@@ -8,24 +8,30 @@ public class MenuManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
+    }
+    public void GoToBrawl()
+    {
+        SceneManager.LoadScene("Brunch Brawl Lobby");
+    }
+    public void GoToMain()
+    {
+        SceneManager.LoadScene("Prolog");
     }
 
-    public void GoToMain(){
-        SceneManager.LoadScene("Main");
-    }
-
-    public void Quit(){
+    public void Quit()
+    {
         Application.Quit();
     }
 
-    public void GoToMainMenu(){
+    public void GoToMainMenu()
+    {
         SceneManager.LoadScene("Main Menu");
     }
 }

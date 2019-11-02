@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class PhaserMove : MonoBehaviour
 {
@@ -27,8 +28,9 @@ public class PhaserMove : MonoBehaviour
 
     void move()
     {
-        Vector3 acceleration = transform.up;
-        transform.position += acceleration * speed * Time.deltaTime;
+        transform.Translate(transform.up* speed * Time.deltaTime);
+        // Vector3 acceleration = transform.up;
+        // transform.position += acceleration * speed * Time.deltaTime;
     }
 
     void DestroyGameObject()

@@ -49,6 +49,14 @@ public class ShipInput : IInputActionCollection, IDisposable
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Select"",
+                    ""type"": ""Button"",
+                    ""id"": ""8af74a1f-6418-4878-9db8-d5b50f27269b"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -95,6 +103,17 @@ public class ShipInput : IInputActionCollection, IDisposable
                     ""action"": ""Phaser"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""868c3f06-47f0-4328-99c6-fb9c850034ed"",
+                    ""path"": ""<Gamepad>/select"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -131,6 +150,14 @@ public class ShipInput : IInputActionCollection, IDisposable
                     ""type"": ""PassThrough"",
                     ""id"": ""d7bfeb0a-f15e-47d2-9e30-db62947e6ea4"",
                     ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Tab"",
+                    ""type"": ""Button"",
+                    ""id"": ""bba7aa37-5726-4928-a666-5064caf5a19c"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """"
                 }
@@ -179,6 +206,17 @@ public class ShipInput : IInputActionCollection, IDisposable
                     ""action"": ""Point"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a2313817-54d1-4af6-948f-7ae1879f1f0b"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Tab"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -191,12 +229,14 @@ public class ShipInput : IInputActionCollection, IDisposable
         m_GamePadGamePlay_Forward = m_GamePadGamePlay.FindAction("Forward", throwIfNotFound: true);
         m_GamePadGamePlay_Reverse = m_GamePadGamePlay.FindAction("Reverse", throwIfNotFound: true);
         m_GamePadGamePlay_Phaser = m_GamePadGamePlay.FindAction("Phaser", throwIfNotFound: true);
+        m_GamePadGamePlay_Select = m_GamePadGamePlay.FindAction("Select", throwIfNotFound: true);
         // KMGamePlay
         m_KMGamePlay = asset.FindActionMap("KMGamePlay", throwIfNotFound: true);
         m_KMGamePlay_Phaser = m_KMGamePlay.FindAction("Phaser", throwIfNotFound: true);
         m_KMGamePlay_Reverse = m_KMGamePlay.FindAction("Reverse", throwIfNotFound: true);
         m_KMGamePlay_Forward = m_KMGamePlay.FindAction("Forward", throwIfNotFound: true);
         m_KMGamePlay_Point = m_KMGamePlay.FindAction("Point", throwIfNotFound: true);
+        m_KMGamePlay_Tab = m_KMGamePlay.FindAction("Tab", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -250,6 +290,7 @@ public class ShipInput : IInputActionCollection, IDisposable
     private readonly InputAction m_GamePadGamePlay_Forward;
     private readonly InputAction m_GamePadGamePlay_Reverse;
     private readonly InputAction m_GamePadGamePlay_Phaser;
+    private readonly InputAction m_GamePadGamePlay_Select;
     public struct GamePadGamePlayActions
     {
         private ShipInput m_Wrapper;
@@ -258,6 +299,7 @@ public class ShipInput : IInputActionCollection, IDisposable
         public InputAction @Forward => m_Wrapper.m_GamePadGamePlay_Forward;
         public InputAction @Reverse => m_Wrapper.m_GamePadGamePlay_Reverse;
         public InputAction @Phaser => m_Wrapper.m_GamePadGamePlay_Phaser;
+        public InputAction @Select => m_Wrapper.m_GamePadGamePlay_Select;
         public InputActionMap Get() { return m_Wrapper.m_GamePadGamePlay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -279,6 +321,9 @@ public class ShipInput : IInputActionCollection, IDisposable
                 Phaser.started -= m_Wrapper.m_GamePadGamePlayActionsCallbackInterface.OnPhaser;
                 Phaser.performed -= m_Wrapper.m_GamePadGamePlayActionsCallbackInterface.OnPhaser;
                 Phaser.canceled -= m_Wrapper.m_GamePadGamePlayActionsCallbackInterface.OnPhaser;
+                Select.started -= m_Wrapper.m_GamePadGamePlayActionsCallbackInterface.OnSelect;
+                Select.performed -= m_Wrapper.m_GamePadGamePlayActionsCallbackInterface.OnSelect;
+                Select.canceled -= m_Wrapper.m_GamePadGamePlayActionsCallbackInterface.OnSelect;
             }
             m_Wrapper.m_GamePadGamePlayActionsCallbackInterface = instance;
             if (instance != null)
@@ -295,6 +340,9 @@ public class ShipInput : IInputActionCollection, IDisposable
                 Phaser.started += instance.OnPhaser;
                 Phaser.performed += instance.OnPhaser;
                 Phaser.canceled += instance.OnPhaser;
+                Select.started += instance.OnSelect;
+                Select.performed += instance.OnSelect;
+                Select.canceled += instance.OnSelect;
             }
         }
     }
@@ -307,6 +355,7 @@ public class ShipInput : IInputActionCollection, IDisposable
     private readonly InputAction m_KMGamePlay_Reverse;
     private readonly InputAction m_KMGamePlay_Forward;
     private readonly InputAction m_KMGamePlay_Point;
+    private readonly InputAction m_KMGamePlay_Tab;
     public struct KMGamePlayActions
     {
         private ShipInput m_Wrapper;
@@ -315,6 +364,7 @@ public class ShipInput : IInputActionCollection, IDisposable
         public InputAction @Reverse => m_Wrapper.m_KMGamePlay_Reverse;
         public InputAction @Forward => m_Wrapper.m_KMGamePlay_Forward;
         public InputAction @Point => m_Wrapper.m_KMGamePlay_Point;
+        public InputAction @Tab => m_Wrapper.m_KMGamePlay_Tab;
         public InputActionMap Get() { return m_Wrapper.m_KMGamePlay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -336,6 +386,9 @@ public class ShipInput : IInputActionCollection, IDisposable
                 Point.started -= m_Wrapper.m_KMGamePlayActionsCallbackInterface.OnPoint;
                 Point.performed -= m_Wrapper.m_KMGamePlayActionsCallbackInterface.OnPoint;
                 Point.canceled -= m_Wrapper.m_KMGamePlayActionsCallbackInterface.OnPoint;
+                Tab.started -= m_Wrapper.m_KMGamePlayActionsCallbackInterface.OnTab;
+                Tab.performed -= m_Wrapper.m_KMGamePlayActionsCallbackInterface.OnTab;
+                Tab.canceled -= m_Wrapper.m_KMGamePlayActionsCallbackInterface.OnTab;
             }
             m_Wrapper.m_KMGamePlayActionsCallbackInterface = instance;
             if (instance != null)
@@ -352,6 +405,9 @@ public class ShipInput : IInputActionCollection, IDisposable
                 Point.started += instance.OnPoint;
                 Point.performed += instance.OnPoint;
                 Point.canceled += instance.OnPoint;
+                Tab.started += instance.OnTab;
+                Tab.performed += instance.OnTab;
+                Tab.canceled += instance.OnTab;
             }
         }
     }
@@ -362,6 +418,7 @@ public class ShipInput : IInputActionCollection, IDisposable
         void OnForward(InputAction.CallbackContext context);
         void OnReverse(InputAction.CallbackContext context);
         void OnPhaser(InputAction.CallbackContext context);
+        void OnSelect(InputAction.CallbackContext context);
     }
     public interface IKMGamePlayActions
     {
@@ -369,5 +426,6 @@ public class ShipInput : IInputActionCollection, IDisposable
         void OnReverse(InputAction.CallbackContext context);
         void OnForward(InputAction.CallbackContext context);
         void OnPoint(InputAction.CallbackContext context);
+        void OnTab(InputAction.CallbackContext context);
     }
 }

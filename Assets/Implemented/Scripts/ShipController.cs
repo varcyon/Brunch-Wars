@@ -1,33 +1,57 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Networking;
+using Photon.Pun;
 
 public class ShipController : MonoBehaviour
 {
+    public PhotonView PV;
     ShipInput controls;
     Vector2 move = Vector2.zero;
     float engineForward;
     float EngineReverse;
     bool shoot;
-    [SerializeField] float maxSpeed = 200;
+
+    public bool miniMapShow = false;
+
+
+    [SerializeField] float normalMaxSpeed = 10;
+    [SerializeField] float currenMaxSpeed;
+    [SerializeField] float boostedMaxSpeed;
     [SerializeField] float showSpeed;
     [SerializeField] public enum SteeringType { Controller, Keyboard };
     [SerializeField] public SteeringType steeringType;
     [SerializeField] float rotateSpeed;
     [SerializeField] float rotateSpeedK;
-    [SerializeField] float speed;
+    [SerializeField] float normalSpeed = 200f;
+    [SerializeField] float currentSpeed;
+    [SerializeField] float boostedSpeed;
     [SerializeField] Rigidbody2D rigidbody;
+    [SerializeField] ParticleSystem thurster1;
+    [SerializeField] ParticleSystem thurster2;
     [SerializeField] private GameObject phaserShot;
     [SerializeField] private Transform leftShootPoint;
     [SerializeField] private Transform rightShootPoint;
+
     [SerializeField] private Transform hotSaucePoint;
+
+    [SerializeField] private Transform jamPoint1;
+    [SerializeField] private Transform jamPoint2;
+    [SerializeField] private Transform jamPoint3;
+    [SerializeField] private Transform jamPoint4;
+    [SerializeField] private Transform jamPoint5;
+    [SerializeField] private Transform jamPoint6;
+    [SerializeField] private Transform jamPoint7;
+    [SerializeField] private Transform jamPoint8;
+
+
     [SerializeField] float attackTimer = 1f;
     float currentAttackTimer;
     bool canShoot;
-    public GameObject canvasK;
-    public GameObject canvasC;
-    public Dropdown controller;
+
     public static ShipController Instance { get; set; }
 
     Vector2 mousePos;
@@ -36,7 +60,20 @@ public class ShipController : MonoBehaviour
     [SerializeField] public bool hotSauce;
     [SerializeField] float HotSauseActive = 5f;
     [SerializeField] float HotSauseActiveCur = 0f;
-    [SerializeField] GameObject hotSauceIcon;
+
+
+    [SerializeField] public bool jam;
+    [SerializeField] float jamActive = 5f;
+    [SerializeField] float jamActiveCur = 0f;
+
+    [SerializeField] public bool blueBerry;
+    [SerializeField] float blueBerryActive = 5f;
+    [SerializeField] float blueBerryActiveCur = 0f;
+
+    [SerializeField] public bool donut;
+    [SerializeField] float donutActive = 5f;
+    [SerializeField] float donutActiveCur = 0f;
+
 
     void MakeSingleton()
     {
@@ -44,13 +81,20 @@ public class ShipController : MonoBehaviour
         {
             Instance = this;
         }
-        else if (Instance != this)
-        {
-            Destroy(gameObject);
-        }
+        // else if (Instance != this)
+        // {
+        //     Destroy(gameObject);
+        // }
     }
     void Awake()
     {
+        currentSpeed = normalSpeed;
+        boostedSpeed = normalSpeed * 10;
+
+        currenMaxSpeed = normalMaxSpeed;
+        boostedMaxSpeed = normalMaxSpeed * 2;
+
+
         MakeSingleton();
         Controls();
     }
@@ -82,13 +126,14 @@ public class ShipController : MonoBehaviour
         controls.KMGamePlay.Reverse.canceled += ctx => EngineReverse = 0f;
         controls.KMGamePlay.Phaser.performed += ctx => shoot = true;
         controls.KMGamePlay.Phaser.canceled += ctx => shoot = false;
-        controls.KMGamePlay.Point.performed += ctx => mousePos= ctx.ReadValue<Vector2>();
-       // controls.KMGamePlay.Point.canceled += ctx => mousePos= ctx.ReadValue<Vector2>();
+        controls.KMGamePlay.Point.performed += ctx => mousePos = ctx.ReadValue<Vector2>();
+        controls.KMGamePlay.Tab.performed += ctx => miniMapShow = !miniMapShow;
     }
 
     void Start()
     {
         currentAttackTimer = attackTimer;
+        PV = GetComponent<PhotonView>();
     }
 
     void Update()
@@ -97,10 +142,36 @@ public class ShipController : MonoBehaviour
     }
     void FixedUpdate()
     {
+        StartEngines();
+        if (PV.IsMine) {
         ShipMove();
         CanShoot();
-        showSpeed = rigidbody.velocity.magnitude;
+        }
+
     }
+
+    void StartEngines()
+    {
+        if (engineForward > 0.001f)
+        {
+            thurster1.gameObject.SetActive(true);
+            thurster2.gameObject.SetActive(true);
+        }
+        else
+        {
+            thurster1.gameObject.SetActive(false);
+            thurster2.gameObject.SetActive(false);
+
+        }
+
+    }
+
+
+    // [Command]
+    // void CmdNetworkShoot(GameObject go)
+    // {
+    //     NetworkServer.Spawn(go);
+    // }
     void CanShoot()
     {
         attackTimer += Time.deltaTime;
@@ -114,11 +185,25 @@ public class ShipController : MonoBehaviour
             {
                 canShoot = false;
                 attackTimer = 0f;
-                Instantiate(phaserShot, leftShootPoint.position, transform.rotation);
-                Instantiate(phaserShot, rightShootPoint.position, transform.rotation);
+                GameObject go = Instantiate(phaserShot, leftShootPoint.position, transform.rotation);
+                GameObject go1 = Instantiate(phaserShot, rightShootPoint.position, transform.rotation);
+                // CmdNetworkShoot(go);
+                // CmdNetworkShoot(go1);
                 if (hotSauce)
                 {
-                    Instantiate(phaserShot, hotSaucePoint.position, transform.rotation);
+                    GameObject go3 = Instantiate(phaserShot, hotSaucePoint.position, transform.rotation);
+                }
+                if (jam)
+                {
+                    GameObject go4 = Instantiate(phaserShot, hotSaucePoint.position, transform.rotation);
+                    GameObject go5 = Instantiate(phaserShot, jamPoint1.position, jamPoint1.rotation);
+                    GameObject go6 = Instantiate(phaserShot, jamPoint2.position, jamPoint2.rotation);
+                    GameObject go7 = Instantiate(phaserShot, jamPoint3.position, jamPoint3.rotation);
+                    GameObject go8 = Instantiate(phaserShot, jamPoint4.position, jamPoint4.rotation);
+                    GameObject go9 = Instantiate(phaserShot, jamPoint5.position, jamPoint5.rotation);
+                    GameObject go10 = Instantiate(phaserShot, jamPoint6.position, jamPoint6.rotation);
+                    GameObject go11 = Instantiate(phaserShot, jamPoint7.position, jamPoint7.rotation);
+                    GameObject go12 = Instantiate(phaserShot, jamPoint8.position, jamPoint8.rotation);
                 }
             }
         }
@@ -143,21 +228,21 @@ public class ShipController : MonoBehaviour
             if (engineForward > 0f)
             {
                 Vector3 acceleration = transform.up;
-                rigidbody.AddForce(acceleration * speed * Time.deltaTime);
-                if (rigidbody.velocity.magnitude > maxSpeed)
+                rigidbody.AddForce(acceleration * currentSpeed * Time.deltaTime);
+                if (rigidbody.velocity.magnitude > currenMaxSpeed)
                 {
-                    rigidbody.velocity = rigidbody.velocity.normalized * maxSpeed;
+                    rigidbody.velocity = rigidbody.velocity.normalized * currenMaxSpeed;
                 }
             }
-            if (EngineReverse > 0f)
-            {
-                Vector3 acceleration = -transform.up;
-                rigidbody.AddForce(acceleration * speed * Time.deltaTime);
-                if (rigidbody.velocity.magnitude > maxSpeed)
-                {
-                    rigidbody.velocity = rigidbody.velocity.normalized * maxSpeed;
-                }
-            }
+            // if (EngineReverse > 0f)
+            // {
+            //     Vector3 acceleration = -transform.up;
+            //     rigidbody.AddForce(acceleration * speed * Time.deltaTime);
+            //     if (rigidbody.velocity.magnitude > maxSpeed)
+            //     {
+            //         rigidbody.velocity = rigidbody.velocity.normalized * maxSpeed;
+            //     }
+            // }
 
         }
         /////////////////////////////////////////////
@@ -178,28 +263,31 @@ public class ShipController : MonoBehaviour
             if (engineForward > 0f)
             {
                 Vector3 acceleration = transform.up;
-                rigidbody.AddForce(acceleration * speed * Time.deltaTime);
-                if (rigidbody.velocity.magnitude > maxSpeed)
+                rigidbody.AddForce(acceleration * currentSpeed * Time.deltaTime);
+                if (rigidbody.velocity.magnitude > currenMaxSpeed)
                 {
-                    rigidbody.velocity = rigidbody.velocity.normalized * maxSpeed;
+                    rigidbody.velocity = rigidbody.velocity.normalized * currenMaxSpeed;
                 }
             }
 
-            if (EngineReverse > 0f)
-            {
-                Vector3 acceleration = -transform.up;
-                rigidbody.AddForce(acceleration * speed * Time.deltaTime);
-                if (rigidbody.velocity.magnitude > maxSpeed)
-                {
-                    rigidbody.velocity = rigidbody.velocity.normalized * maxSpeed;
-                }
-            }
+            // if (EngineReverse > 0f)
+            // {
+            //     Vector3 acceleration = -transform.up;
+            //     rigidbody.AddForce(acceleration * speed * Time.deltaTime);
+            //     if (rigidbody.velocity.magnitude > maxSpeed)
+            //     {
+            //         rigidbody.velocity = rigidbody.velocity.normalized * maxSpeed;
+            //     }
+            // }
         }
     }
 
     void PowerUps()
     {
         HotSauce();
+        Jam();
+        BlueBerry();
+        Donut();
     }
 
     void HotSauce()
@@ -212,33 +300,93 @@ public class ShipController : MonoBehaviour
                 HotSauseActiveCur = 0;
                 hotSauce = false;
             }
-            hotSauceIcon.SetActive(true);
+            PowerUpIcons.Instance.hotsauceIcon.SetActive(true);
         }
         else
         {
-            hotSauceIcon.SetActive(false);
+            PowerUpIcons.Instance.hotsauceIcon.SetActive(false);
+        }
+    }
+
+    void Jam()
+    {
+        if (jam)
+        {
+            jamActiveCur += Time.deltaTime;
+            if (jamActiveCur >= jamActive)
+            {
+                jamActiveCur = 0;
+                jam = false;
+            }
+            PowerUpIcons.Instance.jamIcon.SetActive(true);
+        }
+        else
+        {
+            PowerUpIcons.Instance.jamIcon.SetActive(false);
+        }
+    }
+
+    void BlueBerry()
+    {
+        if (blueBerry)
+        {
+            blueBerryActiveCur += Time.deltaTime;
+            if (blueBerryActiveCur >= jamActive)
+            {
+                blueBerryActiveCur = 0;
+                blueBerry = false;
+            }
+
+            currentSpeed = boostedSpeed;
+            currenMaxSpeed = boostedMaxSpeed;
+            PowerUpIcons.Instance.blueBerryIcon.SetActive(true);
+        }
+        else
+        {
+            currentSpeed = normalSpeed;
+            currenMaxSpeed = normalMaxSpeed;
+            PowerUpIcons.Instance.blueBerryIcon.SetActive(false);
+
+        }
+    }
+
+    void Donut()
+    {
+        if (donut)
+        {
+            donutActiveCur += Time.deltaTime;
+            if (donutActiveCur >= donutActive)
+            {
+                donutActiveCur = 0;
+                donut = false;
+            }
+            PowerUpIcons.Instance.donutIcon.SetActive(true);
+        }
+        else
+        {
+            PowerUpIcons.Instance.donutIcon.SetActive(false);
         }
     }
 
     /////////////////////////////////////////////
-    public void ChangeController()
-    {
-        if (controller.value == 0)
-        {
-            steeringType = SteeringType.Keyboard;
-            canvasK.gameObject.SetActive(true);
-            canvasC.gameObject.SetActive(false);
+    // public void ChangeController()
+    // {
+    //     if (controller.value == 0)
+    //     {
+    //         steeringType = SteeringType.Keyboard;
+    //         canvasK.gameObject.SetActive(true);
+    //         canvasC.gameObject.SetActive(false);
 
-        }
+    //     }
 
-        if (controller.value == 1)
-        {
-            steeringType = SteeringType.Controller;
-            canvasK.gameObject.SetActive(false);
-            canvasC.gameObject.SetActive(true);
-        }
+    //     if (controller.value == 1)
+    //     {
+    //         steeringType = SteeringType.Controller;
+    //         canvasK.gameObject.SetActive(false);
+    //         canvasC.gameObject.SetActive(true);
+    //     }
 
-    }
+    // }
 
 }
 

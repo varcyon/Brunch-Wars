@@ -30,6 +30,7 @@ public class Damageable : MonoBehaviour
 
     void FixedUpdate()
     {
+
         if (recovering)
         {
             recoveryCounter += Time.deltaTime;
@@ -48,27 +49,37 @@ public class Damageable : MonoBehaviour
 
     public void TakeDamage(int amount, GameObject other)
     {
-        if (!recovering)
+        // not the player
+        if (gameObject.tag != "Player")
         {
-          
-            recoveryCounter = 0;
-            recovering = true;
             currentHealth = Mathf.Clamp(currentHealth - amount, 0, maxHealth);
-        }
-        if (health <= 0)
-        {
-            if (gameObject.layer == 8)
+            if (health <= 0)
             {
-
-            }
-            else
-            {
-                if (other.gameObject.tag == "Enemy")
-                {          
+                if (other.gameObject.tag == "EnemyBase")
+                {
                     Die();
-                    LevelManger.Instance.enemies.Remove(other.gameObject); 
+                    LevelManger.Instance.enemies.Remove(other.gameObject);
+                }
+                Die();
+            }
+        }
+
+        // the player
+        if (gameObject.tag == "Player")
+        {
+            if (!ShipController.Instance.donut)
+            {
+                if (!recovering)
+                {
+                    recoveryCounter = 0;
+                    recovering = true;
+                    currentHealth = Mathf.Clamp(currentHealth - amount, 0, maxHealth);
                 }
             }
+            if (health <= 0)
+            {
+            }
+
         }
     }
     public void increaseHealth(int amount)

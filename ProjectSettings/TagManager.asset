@@ -6,6 +6,11 @@ TagManager:
   tags:
   - Enemy
   - MiniMapCamera
+  - EnemyBase
+  - HotSauceIcon
+  - JamIcon
+  - BlueBerryIcon
+  - DonutIcon
   layers:
   - Default
   - TransparentFX

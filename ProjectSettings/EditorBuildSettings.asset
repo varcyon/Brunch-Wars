@@ -7,13 +7,37 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 1
     path: Assets/Implemented/Scenes/Main Menu.unity
+    guid: 82ec29595b7435a40a2f53edc845b4f9
+  - enabled: 1
+    path: Assets/Implemented/Scenes/Prolog.unity
     guid: 0836a2a10c284f046b41e72a84c37bfe
   - enabled: 1
-    path: Assets/Implemented/Scenes/Main.unity
+    path: Assets/Implemented/Scenes/Level 1.unity
     guid: edbfd5229c6492b4b8ff78676dfe8b42
+  - enabled: 1
+    path: Assets/Implemented/Scenes/Level 2.unity
+    guid: 444aa4d739d68e74cadbdae657c26ff8
+  - enabled: 1
+    path: Assets/Implemented/Scenes/Level 3.unity
+    guid: a835b0f4f67c3164ea1ff740f5f386fb
+  - enabled: 1
+    path: Assets/Implemented/Scenes/Commander Whipcream.unity
+    guid: 26445e02f25b3cd4a859b629395aa8f5
+  - enabled: 1
+    path: Assets/Implemented/Scenes/Waffle King.unity
+    guid: 24af4e93af24e7c47a6c79596411a2fb
   - enabled: 1
     path: Assets/Implemented/Scenes/Victory.unity
     guid: 22a2b1141ce0cc74a949e3f717cae2bf
+  - enabled: 1
+    path: Assets/Implemented/Scenes/Game Over.unity
+    guid: a704c94cce02665458f9d7a90d05197e
+  - enabled: 1
+    path: Assets/Implemented/Scenes/Brunch Brawl Lobby.unity
+    guid: 9c68b5604e67bc54ea0126fb3dbbaa9f
+  - enabled: 1
+    path: Assets/Implemented/Scenes/Brunch Brawl.unity
+    guid: f851759830aca9c46859532d13aabdb8
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: bbe949168fb8616428132eb2c57a8f03,
       type: 2}

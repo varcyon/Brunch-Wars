@@ -25,7 +25,7 @@ public class LevelManger : MonoBehaviour
     }
     void Start()
     {
-        foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("Enemy"))
+        foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("EnemyBase"))
         {
             enemies.Add(enemy);
         }
@@ -35,7 +35,7 @@ public class LevelManger : MonoBehaviour
     void Update()
     {
         if(enemies.Count == 0){
-             SceneManager.LoadScene("Victory");
+             SceneManager.LoadScene("Level 2");
         }
     }
 }

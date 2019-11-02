@@ -9,16 +9,18 @@ public class Explode : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Damageable controller = other.gameObject.GetComponent<Damageable>();
-        if (controller != null)
+        if (other.tag == "Player")
         {
-            controller.TakeDamage(damage,other.gameObject);
-        }
+            Damageable controller = other.gameObject.GetComponent<Damageable>();
+            if (controller != null)
+            {
+                controller.TakeDamage(damage, other.gameObject);
+            }
 
-        Debug.Log("Boom!");
-        
-       LevelManger.Instance.enemies.Remove(gameObject);           
-        Destroy(gameObject);
+            Debug.Log("Boom!");
+
+            Destroy(gameObject);
+        }
     }
 
 }
