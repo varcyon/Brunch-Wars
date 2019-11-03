@@ -6,8 +6,8 @@ using UnityEngine;
 using Cinemachine;
 public class GameSetupController : MonoBehaviour
 {
-    public GameObject playership;
-    public CinemachineVirtualCamera virtualCam;
+    GameObject playership;
+    [SerializeField] CinemachineVirtualCamera virtualCam;
     void Start()
     {
         CreatePlayer(); //Create a networked player object for each player that loads into the multiplayer scenes.

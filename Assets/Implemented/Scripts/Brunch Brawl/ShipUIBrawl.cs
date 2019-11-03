@@ -5,30 +5,27 @@ using Photon.Pun;
 
 public class ShipUIBrawl : MonoBehaviourPun
 {
-    [SerializeField] private float healthBarWidth;
+    public float healthBarWidth;
     private float healthBarWidthSmooth;
-    [SerializeField] private float healthBarWidthEase;
+    [SerializeField] float healthBarWidthEase;
     [SerializeField] GameObject healthBar;
     public GameObject miniMap;
+        public PhotonView PV;
+
     public static ShipUIBrawl Instance { get; set; }
 
-    private void Awake()
+    void Awake()
     {
 
         if (Instance == null)
         {
             Instance = this;
         }
-        else if (Instance != this)
-        {
-            Destroy(gameObject);
-        }
-
     }
 
     void Start()
     {
-
+        PV = ShipControllerBrawl.Instance.GetComponent<PhotonView>();
         healthBarWidth = 1;
         healthBarWidthSmooth = healthBarWidth;
     }
@@ -36,9 +33,7 @@ public class ShipUIBrawl : MonoBehaviourPun
     // Update is called once per frame
     void Update()
     {
-        
-            if (ShipControllerBrawl.Instance == null)
-            { return; }
+        if(!PV.IsMine){return;}
 
             healthBarWidth = (float)ShipControllerBrawl.Instance.GetComponent<DamageableBrawl>().health / (float)ShipControllerBrawl.Instance.GetComponent<DamageableBrawl>().maxHealth;
             healthBarWidthSmooth += (healthBarWidth - healthBarWidthSmooth) * Time.deltaTime * healthBarWidthEase;
@@ -53,6 +48,5 @@ public class ShipUIBrawl : MonoBehaviourPun
                 miniMap.SetActive(false);
             }
         
-
     }
 }
