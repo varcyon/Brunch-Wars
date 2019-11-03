@@ -1284,7 +1284,7 @@ GameObject:
   m_Component:
   - component: {fileID: 546114919}
   - component: {fileID: 546114920}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: GameObject (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1618,7 +1618,7 @@ GameObject:
   m_Component:
   - component: {fileID: 799583597}
   - component: {fileID: 799583598}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: GameObject (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1675,7 +1675,7 @@ GameObject:
   m_Component:
   - component: {fileID: 805289910}
   - component: {fileID: 805289909}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: CamConstraint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3069,7 +3069,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1650719597}
   - component: {fileID: 1650719598}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3474,7 +3474,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1776997499}
   - component: {fileID: 1776997500}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: GameObject (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

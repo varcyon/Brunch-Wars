@@ -11,7 +11,7 @@ public class PlayerPrefab : MonoBehaviour
     public GameObject ShipPrefab;
     void Start()
     {
-     SpawnShip(); 
+    // SpawnShip(); 
     }
 
     void Update()
