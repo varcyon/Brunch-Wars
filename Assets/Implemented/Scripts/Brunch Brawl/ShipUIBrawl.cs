@@ -40,7 +40,7 @@ public class ShipUIBrawl : MonoBehaviourPun
             if (ShipControllerBrawl.Instance == null)
             { return; }
 
-            healthBarWidth = (float)ShipControllerBrawl.Instance.GetComponent<Damageable>().health / (float)ShipController.Instance.GetComponent<Damageable>().maxHealth;
+            healthBarWidth = (float)ShipControllerBrawl.Instance.GetComponent<DamageableBrawl>().health / (float)ShipControllerBrawl.Instance.GetComponent<DamageableBrawl>().maxHealth;
             healthBarWidthSmooth += (healthBarWidth - healthBarWidthSmooth) * Time.deltaTime * healthBarWidthEase;
             healthBar.transform.localScale = new Vector2(healthBarWidthSmooth, transform.localScale.y);
 

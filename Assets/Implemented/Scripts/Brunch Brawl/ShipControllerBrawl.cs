@@ -136,8 +136,10 @@ public class ShipControllerBrawl : MonoBehaviourPun
         PV = GetComponent<PhotonView>();
         if(PV.IsMine){
             name.text = PhotonNetwork.NickName;
+            gameObject.name = PhotonNetwork.NickName;
         } else{
             name.text = PV.Owner.NickName;
+            gameObject.name = PV.Owner.NickName;
         }
     }
 

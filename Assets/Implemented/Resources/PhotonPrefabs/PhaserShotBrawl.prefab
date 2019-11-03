@@ -182,6 +182,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: 3227940648469148200}
+  - {fileID: 6957609856175969519}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -198,6 +199,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 50
+  destrythis: 0
 --- !u!114 &3227940648469148200
 MonoBehaviour:
   m_ObjectHideFlags: 0

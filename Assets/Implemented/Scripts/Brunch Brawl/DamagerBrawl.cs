@@ -22,22 +22,21 @@ public class DamagerBrawl : MonoBehaviourPun
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        photonView.RPC("RPC_damage", RpcTarget.All, other);
-
+          DamageableBrawl controller = other.GetComponent<DamageableBrawl>();
+        if (controller != null)
+        {
+            if (other.gameObject.tag == "Player"){
+            string hitName = other.gameObject.name;
+            photonView.RPC("RPC_damage", RpcTarget.All, hitName);
+            }
+        }
+        
     }
 
     [PunRPC]
-    void RPC_damage(Collider2D other)
+    void RPC_damage(string hitName)
     {
-        Damageable controller = other.GetComponent<Damageable>();
-        if (controller != null)
-        {
-            if (other.gameObject.tag == "Player")
-            {
-                controller.TakeDamage(damage, other.gameObject);
-            }
-        }
+        GameObject hitPlayer = GameObject.Find(hitName);
+        hitPlayer.GetComponent<DamageableBrawl>().TakeDamage(damage);
     }
-
 }
-

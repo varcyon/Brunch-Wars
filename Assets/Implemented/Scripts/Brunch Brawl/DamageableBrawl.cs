@@ -47,7 +47,7 @@ public class DamageableBrawl : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void TakeDamage(int amount, GameObject other)
+    public void TakeDamage(int amount)
     {
  
 

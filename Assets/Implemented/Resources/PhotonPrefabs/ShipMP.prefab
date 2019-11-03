@@ -245,6 +245,7 @@ GameObject:
   - component: {fileID: 1047011052667019277}
   - component: {fileID: 1223397916747601360}
   - component: {fileID: 7113540576408388306}
+  - component: {fileID: -8296499598184036173}
   m_Layer: 0
   m_Name: ShipMP
   m_TagString: Player
@@ -436,6 +437,24 @@ MonoBehaviour:
   donut: 0
   donutActive: 5
   donutActiveCur: 0
+--- !u!114 &-8296499598184036173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4479617575606587634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e83970913439ab44bcca202a7b26f0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 5
+  currentHealth: 0
+  recovering: 0
+  recoveryCounter: 0
+  recoveryTime: 2
+  deathParticles: {fileID: 0}
 --- !u!1 &4537635825834025046
 GameObject:
   m_ObjectHideFlags: 0
@@ -967,6 +986,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5348115764729739241, guid: bd8203cb5631e394cab85729f1ece432,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5348115764729739220, guid: bd8203cb5631e394cab85729f1ece432,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1051,6 +1075,11 @@ PrefabInstance:
     - target: {fileID: 5348115764729739241, guid: bd8203cb5631e394cab85729f1ece432,
         type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5348115764729739241, guid: bd8203cb5631e394cab85729f1ece432,
+        type: 3}
+      propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5348115764729739220, guid: bd8203cb5631e394cab85729f1ece432,
