@@ -8,9 +8,10 @@ public class PhaserMoveBrawl : MonoBehaviourPun,IPunObservable
     [SerializeField] float speed = 50f;
     float destroy = 1f;
     public bool destrythis;
+    public PhotonView PV;
 
      void OnTriggerEnter2D(Collider2D other) {
-        Debug.Log("hit" + other.gameObject.name);
+        Debug.Log("hit " + other.gameObject.name);
         // if(other.gameObject.tag == "Enemy"){
         //     LevelManger.Instance.enemies.Remove(other.gameObject);            
         // }

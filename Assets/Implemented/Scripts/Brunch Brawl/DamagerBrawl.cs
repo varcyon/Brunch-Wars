@@ -13,10 +13,10 @@ public class DamagerBrawl : MonoBehaviourPun
     void OnTriggerStay2D(Collider2D other)
     {
 
-        if (isStaticArea)
-        {
-        photonView.RPC("RPC_damage", RpcTarget.All, other);
-        }
+        // if (isStaticArea)
+        // {
+        // photonView.RPC("RPC_damage", RpcTarget.All, other);
+        // }
     }
 
 

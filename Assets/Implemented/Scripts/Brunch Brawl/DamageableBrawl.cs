@@ -65,6 +65,8 @@ public class DamageableBrawl : MonoBehaviour
             }
             if (health <= 0)
             {
+                Debug.Log(gameObject.name + " Has been killed");
+                GameSetupController.playerList.Remove(gameObject);
             }
 
         }
