@@ -19,7 +19,7 @@ public class Explode : MonoBehaviour
 
             Debug.Log("Boom!");
 
-            Destroy(gameObject);
+           gameObject.GetComponent<Damageable>().TakeDamage(100, this.gameObject);
         }
     }
 

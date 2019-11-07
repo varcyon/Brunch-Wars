@@ -33,6 +33,6 @@ public class Damager : MonoBehaviour
                 controller.TakeDamage(damage, other.gameObject);
             }
        
-
+        Destroy(gameObject);
     }
 }

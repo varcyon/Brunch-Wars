@@ -229,6 +229,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e6fe007edc1f80498e34552a60e91c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Lives: 3
+  livesIcon:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!4 &334913892
 Transform:
   m_ObjectHideFlags: 0
@@ -479,7 +487,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85a74ca47e5b9c042b2abeeaf6a665c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
+  speed: 1
 --- !u!1 &1930482089
 GameObject:
   m_ObjectHideFlags: 0

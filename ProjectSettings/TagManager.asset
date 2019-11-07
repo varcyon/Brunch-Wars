@@ -11,6 +11,9 @@ TagManager:
   - JamIcon
   - BlueBerryIcon
   - DonutIcon
+  - LivesIcon
+  - VC
+  - PlayerStart
   layers:
   - Default
   - TransparentFX

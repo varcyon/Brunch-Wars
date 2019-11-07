@@ -10,6 +10,7 @@ public class Damageable : MonoBehaviour
     public int maxHealth = 5;
     public int currentHealth;
     public int health { get { return currentHealth; } }
+    [SerializeField]GameObject parent;
 
     public bool recovering;
     public float recoveryCounter;
@@ -17,7 +18,7 @@ public class Damageable : MonoBehaviour
     Animator animator;
 
 
-    [SerializeField] GameObject deathParticles;
+    [SerializeField] List<GameObject> deathParticles = new List<GameObject>();
 
 
 
@@ -44,6 +45,14 @@ public class Damageable : MonoBehaviour
 
     private void Die()
     {
+        foreach (GameObject item in deathParticles)
+        {
+            item.SetActive(true);
+        }
+        foreach (GameObject item in deathParticles)
+        {
+            item.transform.parent = transform.parent;
+        }
         Destroy(gameObject);
     }
 
@@ -58,7 +67,7 @@ public class Damageable : MonoBehaviour
                 if (other.gameObject.tag == "EnemyBase")
                 {
                     Die();
-                    LevelManger.Instance.enemies.Remove(other.gameObject);
+                    LevelManger.Instance.enemieBases.Remove(other.gameObject);
                 }
                 Die();
             }

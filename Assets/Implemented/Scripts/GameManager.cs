@@ -1,42 +1,39 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+
     public int Lives = 3;
-    public GameObject[] livesIcon = new GameObject[6];
+        [SerializeField] CinemachineVirtualCamera virtualCam;
+           public GameObject playership;
+
+
     public static GameManager Instance { get; set; }
     void MakeSingleton()
     {
         if (Instance == null)
         {
             Instance = this;
-        }
-        else if (Instance != this)
-        {
+        } else if(Instance !=this){
             Destroy(gameObject);
         }
     }
-    private void Awake()
+     void Awake()
     {
         MakeSingleton();
+        DontDestroyOnLoad(gameObject);
+        
+
     }
 
 
-    private void Update()
+     void Update()
     {
-       // LivesUpdate();
-    }
-    public void LivesUpdate()
-    {
-        foreach (GameObject life in livesIcon)
-        {
-            life.SetActive(false);
-        }
-        for (int i = 0; i < GameManager.Instance.Lives; i++)
-        {
-            livesIcon[i].SetActive(true);
-        }
+  
+        virtualCam =  GameObject.FindGameObjectWithTag("VC").GetComponent<CinemachineVirtualCamera>();
+                virtualCam.Follow = playership.transform;
     }
 }

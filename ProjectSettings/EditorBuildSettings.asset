@@ -16,16 +16,16 @@ EditorBuildSettings:
     guid: edbfd5229c6492b4b8ff78676dfe8b42
   - enabled: 1
     path: Assets/Implemented/Scenes/Level 2.unity
-    guid: 444aa4d739d68e74cadbdae657c26ff8
+    guid: e0f874a36ef46c346a93f9e7d829bc11
   - enabled: 1
     path: Assets/Implemented/Scenes/Level 3.unity
-    guid: a835b0f4f67c3164ea1ff740f5f386fb
+    guid: 6838b4629f709224bac8b72d5fdbd3d4
   - enabled: 1
     path: Assets/Implemented/Scenes/Commander Whipcream.unity
-    guid: 26445e02f25b3cd4a859b629395aa8f5
+    guid: 7b0c916c87047ce4dabc01daa612180c
   - enabled: 1
     path: Assets/Implemented/Scenes/Waffle King.unity
-    guid: 24af4e93af24e7c47a6c79596411a2fb
+    guid: 95d776320c5cdf54bac3fd6e44a1e30d
   - enabled: 1
     path: Assets/Implemented/Scenes/Victory.unity
     guid: 22a2b1141ce0cc74a949e3f717cae2bf

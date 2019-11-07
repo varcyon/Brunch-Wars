@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class ShipUI : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class ShipUI : MonoBehaviour
     [SerializeField] GameObject healthBar;
     public GameObject miniMap;
     public static ShipUI Instance { get; set; }
+    [SerializeField] TextMeshProUGUI level;
 
 private void Awake() {
     
@@ -29,6 +31,7 @@ private void Awake() {
 
         healthBarWidth = 1;
         healthBarWidthSmooth = healthBarWidth;
+        level.text = LevelManger.Instance.currentScene;
     }
 
     // Update is called once per frame

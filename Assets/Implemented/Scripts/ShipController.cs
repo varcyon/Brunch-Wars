@@ -3,12 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Networking;
-using Photon.Pun;
 
 public class ShipController : MonoBehaviour
 {
-    public PhotonView PV;
     ShipInput controls;
     Vector2 move = Vector2.zero;
     float engineForward;
@@ -96,6 +93,7 @@ public class ShipController : MonoBehaviour
 
 
         MakeSingleton();
+        DontDestroyOnLoad(gameObject);
         Controls();
     }
 
@@ -133,20 +131,23 @@ public class ShipController : MonoBehaviour
     void Start()
     {
         currentAttackTimer = attackTimer;
-        PV = GetComponent<PhotonView>();
+        
     }
 
     void Update()
     {
-        PowerUps();
+        
+            PowerUps();
+        
+
+
     }
     void FixedUpdate()
     {
         StartEngines();
-        if (PV.IsMine) {
         ShipMove();
         CanShoot();
-        }
+
 
     }
 
@@ -167,11 +168,6 @@ public class ShipController : MonoBehaviour
     }
 
 
-    // [Command]
-    // void CmdNetworkShoot(GameObject go)
-    // {
-    //     NetworkServer.Spawn(go);
-    // }
     void CanShoot()
     {
         attackTimer += Time.deltaTime;
@@ -187,8 +183,6 @@ public class ShipController : MonoBehaviour
                 attackTimer = 0f;
                 GameObject go = Instantiate(phaserShot, leftShootPoint.position, transform.rotation);
                 GameObject go1 = Instantiate(phaserShot, rightShootPoint.position, transform.rotation);
-                // CmdNetworkShoot(go);
-                // CmdNetworkShoot(go1);
                 if (hotSauce)
                 {
                     GameObject go3 = Instantiate(phaserShot, hotSaucePoint.position, transform.rotation);

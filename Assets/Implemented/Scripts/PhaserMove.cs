@@ -28,9 +28,8 @@ public class PhaserMove : MonoBehaviour
 
     void move()
     {
-        transform.Translate(transform.up* speed * Time.deltaTime);
-        // Vector3 acceleration = transform.up;
-        // transform.position += acceleration * speed * Time.deltaTime;
+        Vector3 acceleration = transform.up;
+        transform.position += acceleration * speed * Time.deltaTime;
     }
 
     void DestroyGameObject()
