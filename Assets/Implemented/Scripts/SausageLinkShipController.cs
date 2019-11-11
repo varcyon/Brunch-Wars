@@ -3,14 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class enemyPatrolShipController : MonoBehaviour
+public class SausageLinkShipController : MonoBehaviour
 {
+    public bool attackPlayer;
     [SerializeField] Transform[] destinations;
     [SerializeField] float playerDifferenceX;
     [SerializeField] float playerDifferenceY;
-    [SerializeField] bool wasChasing;
     [SerializeField] GameObject leftShootPoint;
     [SerializeField] GameObject rightShootPoint;
+    [SerializeField] GameObject MiddleShootPoint;
     [SerializeField] GameObject phaserShot;
     Vector3[] worldDestinations;
     Vector3 targetPoint;
@@ -23,10 +24,12 @@ public class enemyPatrolShipController : MonoBehaviour
     float attackTimer = 0.5f;
     float currentAttackTimer;
     bool patrol = true;
+    [SerializeField] bool wasAttacking;
 
     [SerializeField] float chaseZone;
-    public bool chasePlayer;
     [SerializeField] float attackRange;
+    [SerializeField] bool shotMiddle;
+    public static SausageLinkShipController Instance;
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.cyan;
@@ -50,6 +53,7 @@ public class enemyPatrolShipController : MonoBehaviour
     void Awake()
     {
         rigidbody2D = GetComponent<Rigidbody2D>();
+        Instance = this;
     }
     void Start()
     {
@@ -70,7 +74,7 @@ public class enemyPatrolShipController : MonoBehaviour
 
         ChangeDirection();
         //  
-
+        if (attackPlayer) { return; }
         Vector3 acceleration = transform.right;
         rigidbody2D.AddForce(acceleration * Speed * Time.deltaTime);
     }
@@ -79,16 +83,16 @@ public class enemyPatrolShipController : MonoBehaviour
     {
         playerDifferenceX = Mathf.Abs(ShipController.Instance.gameObject.transform.position.x - transform.position.x);
         playerDifferenceY = Mathf.Abs(ShipController.Instance.gameObject.transform.position.y - transform.position.y);
-        if (playerDifferenceX < chaseZone && playerDifferenceY < chaseZone)
+        if (playerDifferenceX < attackRange && playerDifferenceY < attackRange)
         {
-            chasePlayer = true;
+            attackPlayer = true;
             patrol = false;
-            wasChasing = true;
+            wasAttacking = true;
         }
-        else if (wasChasing)
+        else if (wasAttacking)
         {
-            wasChasing = false;
-            chasePlayer = false;
+            wasAttacking = false;
+            attackPlayer = false;
             patrol = true;
             NextPoint();
         }
@@ -133,20 +137,25 @@ public class enemyPatrolShipController : MonoBehaviour
 
             if (attackTimer > currentAttackTimer)
             {
+                transform.position = transform.position;
                 attackTimer = 0f;
                 GameObject es1 = Instantiate(phaserShot, leftShootPoint.transform.position, transform.rotation);
                 es1.transform.Rotate(0f, 0f, -90f);
                 GameObject es2 = Instantiate(phaserShot, rightShootPoint.transform.position, transform.rotation);
                 es2.transform.Rotate(0f, 0f, -90f);
+                if(shotMiddle){
+                    GameObject es3 = Instantiate(phaserShot, MiddleShootPoint.transform.position, transform.rotation);
+                es3.transform.Rotate(0f, 0f, -90f);
+                }
             }
         }
     }
 
     void Move()
     {
-        if (chasePlayer)
+        if (attackPlayer)
         {
-            targetPoint =  ShipController.Instance.gameObject.transform.position;
+            targetPoint = ShipController.Instance.gameObject.transform.position;
             Shooting();
         }
         if (patrol)
