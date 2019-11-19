@@ -14,6 +14,9 @@ TagManager:
   - LivesIcon
   - VC
   - PlayerStart
+  - Cereal
+  - VCconstraint
+  - PauseMenu
   layers:
   - Default
   - TransparentFX

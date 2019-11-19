@@ -12,76 +12,69 @@ public class ShipController : MonoBehaviour
     float EngineReverse;
     bool shoot;
 
-    public bool miniMapShow = false;
+    [HideInInspector] public bool miniMapShow = true;
+     [SerializeField] float normalMaxSpeed = 13;
+    [HideInInspector] [SerializeField] float currenMaxSpeed;
+     [SerializeField] float boostedMaxSpeed;
+    [HideInInspector] [SerializeField] float showSpeed;
+    [HideInInspector] [SerializeField] float rotateSpeed;
+    [HideInInspector] [SerializeField] float rotateSpeedK;
+     [SerializeField] float normalSpeed = 700f;
+    [HideInInspector] [SerializeField] float currentSpeed;
+     [SerializeField] float boostedSpeed;
+    [HideInInspector] [SerializeField] Rigidbody2D rigidbody;
+    [HideInInspector] [SerializeField] ParticleSystem thurster1;
+    [HideInInspector] [SerializeField] ParticleSystem thurster2;
+    [HideInInspector] [SerializeField] private GameObject phaserShot;
+    [HideInInspector] [SerializeField] private Transform leftShootPoint;
+    [HideInInspector] [SerializeField] private Transform rightShootPoint;
+
+    [HideInInspector] [SerializeField] private Transform hotSaucePoint;
+
+    [HideInInspector] [SerializeField] private Transform jamPoint1;
+    [HideInInspector] [SerializeField] private Transform jamPoint2;
+    [HideInInspector] [SerializeField] private Transform jamPoint3;
+    [HideInInspector] [SerializeField] private Transform jamPoint4;
+    [HideInInspector] [SerializeField] private Transform jamPoint5;
+    [HideInInspector] [SerializeField] private Transform jamPoint6;
+    [HideInInspector] [SerializeField] private Transform jamPoint7;
+    [HideInInspector] [SerializeField] private Transform jamPoint8;
 
 
-    [SerializeField] float normalMaxSpeed = 10;
-    [SerializeField] float currenMaxSpeed;
-    [SerializeField] float boostedMaxSpeed;
-    [SerializeField] float showSpeed;
-    [SerializeField] public enum SteeringType { Controller, Keyboard };
-    [SerializeField] public SteeringType steeringType;
-    [SerializeField] float rotateSpeed;
-    [SerializeField] float rotateSpeedK;
-    [SerializeField] float normalSpeed = 200f;
-    [SerializeField] float currentSpeed;
-    [SerializeField] float boostedSpeed;
-    [SerializeField] Rigidbody2D rigidbody;
-    [SerializeField] ParticleSystem thurster1;
-    [SerializeField] ParticleSystem thurster2;
-    [SerializeField] private GameObject phaserShot;
-    [SerializeField] private Transform leftShootPoint;
-    [SerializeField] private Transform rightShootPoint;
-
-    [SerializeField] private Transform hotSaucePoint;
-
-    [SerializeField] private Transform jamPoint1;
-    [SerializeField] private Transform jamPoint2;
-    [SerializeField] private Transform jamPoint3;
-    [SerializeField] private Transform jamPoint4;
-    [SerializeField] private Transform jamPoint5;
-    [SerializeField] private Transform jamPoint6;
-    [SerializeField] private Transform jamPoint7;
-    [SerializeField] private Transform jamPoint8;
-
-
-    [SerializeField] float attackTimer = 1f;
+    [SerializeField] float attackTimer = 0.3f;
     float currentAttackTimer;
     bool canShoot;
+    [HideInInspector] public bool Pause = false;
 
     public static ShipController Instance { get; set; }
 
     Vector2 mousePos;
 
     //////// Power UP
-    [SerializeField] public bool hotSauce;
-    [SerializeField] float HotSauseActive = 5f;
+    [HideInInspector] public bool hotSauce;
+    [SerializeField] float HotSauseActive = 15f;
     [SerializeField] float HotSauseActiveCur = 0f;
 
 
-    [SerializeField] public bool jam;
-    [SerializeField] float jamActive = 5f;
-    [SerializeField] float jamActiveCur = 0f;
+    [HideInInspector] public bool jam;
+    [SerializeField] float jamActive = 10f;
+    float jamActiveCur = 0f;
 
-    [SerializeField] public bool blueBerry;
+    [HideInInspector] public bool blueBerry;
     [SerializeField] float blueBerryActive = 5f;
-    [SerializeField] float blueBerryActiveCur = 0f;
+    float blueBerryActiveCur = 0f;
 
-    [SerializeField] public bool donut;
-    [SerializeField] float donutActive = 5f;
-    [SerializeField] float donutActiveCur = 0f;
+    [HideInInspector] public bool donut;
+    [SerializeField] float donutActive = 30f;
+    float donutActiveCur = 0f;
 
-
+    [SerializeField] int rollPower = 200;
     void MakeSingleton()
     {
         if (Instance == null)
         {
             Instance = this;
         }
-        // else if (Instance != this)
-        // {
-        //     Destroy(gameObject);
-        // }
     }
     void Awake()
     {
@@ -93,7 +86,6 @@ public class ShipController : MonoBehaviour
 
 
         MakeSingleton();
-        DontDestroyOnLoad(gameObject);
         Controls();
     }
 
@@ -114,6 +106,8 @@ public class ShipController : MonoBehaviour
         controls.GamePadGamePlay.Reverse.canceled += ctx => EngineReverse = 0f;
         controls.GamePadGamePlay.Phaser.performed += ctx => shoot = true;
         controls.GamePadGamePlay.Phaser.canceled += ctx => shoot = false;
+        controls.GamePadGamePlay.Select.performed += ctx => Pause = !Pause;
+
     }
 
     void KMControls()
@@ -126,21 +120,20 @@ public class ShipController : MonoBehaviour
         controls.KMGamePlay.Phaser.canceled += ctx => shoot = false;
         controls.KMGamePlay.Point.performed += ctx => mousePos = ctx.ReadValue<Vector2>();
         controls.KMGamePlay.Tab.performed += ctx => miniMapShow = !miniMapShow;
+        controls.KMGamePlay.Esc.performed += ctx => Pause = !Pause;
+
+        controls.KMGamePlay.Roll_Port.performed += ctx => RollPort();
+        controls.KMGamePlay.Roll_Starboard.performed += ctx => RollStarboard();
     }
 
     void Start()
     {
         currentAttackTimer = attackTimer;
-        
     }
 
     void Update()
     {
-        
-            PowerUps();
-        
-
-
+        PowerUps();
     }
     void FixedUpdate()
     {
@@ -205,7 +198,8 @@ public class ShipController : MonoBehaviour
 
     void ShipMove()
     {////////////////////////////////////////////////////
-        if (steeringType == SteeringType.Controller)
+        if (PlayerPrefs.GetString("ControlDevice") == "Controller")
+
         {
             controls.GamePadGamePlay.Enable();
             controls.KMGamePlay.Disable();
@@ -228,21 +222,22 @@ public class ShipController : MonoBehaviour
                     rigidbody.velocity = rigidbody.velocity.normalized * currenMaxSpeed;
                 }
             }
-            // if (EngineReverse > 0f)
-            // {
-            //     Vector3 acceleration = -transform.up;
-            //     rigidbody.AddForce(acceleration * speed * Time.deltaTime);
-            //     if (rigidbody.velocity.magnitude > maxSpeed)
-            //     {
-            //         rigidbody.velocity = rigidbody.velocity.normalized * maxSpeed;
-            //     }
-            // }
+
+            if (EngineReverse > 0f)
+            {
+                Vector3 acceleration = -transform.up;
+                rigidbody.AddForce(acceleration * currentSpeed * Time.deltaTime);
+                if (rigidbody.velocity.magnitude > currenMaxSpeed)
+                {
+                    rigidbody.velocity = rigidbody.velocity.normalized * currenMaxSpeed;
+                }
+            }
 
         }
         /////////////////////////////////////////////
 
 
-        if (steeringType == SteeringType.Keyboard)
+        if (PlayerPrefs.GetString("ControlDevice") == "Keyboard")
         {
             controls.GamePadGamePlay.Disable();
             controls.KMGamePlay.Enable();
@@ -264,20 +259,31 @@ public class ShipController : MonoBehaviour
                 }
             }
 
-            // if (EngineReverse > 0f)
-            // {
-            //     Vector3 acceleration = -transform.up;
-            //     rigidbody.AddForce(acceleration * speed * Time.deltaTime);
-            //     if (rigidbody.velocity.magnitude > maxSpeed)
-            //     {
-            //         rigidbody.velocity = rigidbody.velocity.normalized * maxSpeed;
-            //     }
-            // }
+            if (EngineReverse > 0f)
+            {
+                Vector3 acceleration = -transform.up;
+                rigidbody.AddForce(acceleration * currentSpeed * Time.deltaTime);
+                if (rigidbody.velocity.magnitude > currenMaxSpeed)
+                {
+                    rigidbody.velocity = rigidbody.velocity.normalized * currenMaxSpeed;
+                }
+            }
         }
     }
+    void RollPort()
+    {
+        rigidbody.AddForce(-transform.right * rollPower);
+    }
+    void RollStarboard()
+    {
+        rigidbody.AddForce(transform.right * rollPower);
+    }
+
+
 
     void PowerUps()
     {
+
         HotSauce();
         Jam();
         BlueBerry();
@@ -362,25 +368,6 @@ public class ShipController : MonoBehaviour
         }
     }
 
-    /////////////////////////////////////////////
-    // public void ChangeController()
-    // {
-    //     if (controller.value == 0)
-    //     {
-    //         steeringType = SteeringType.Keyboard;
-    //         canvasK.gameObject.SetActive(true);
-    //         canvasC.gameObject.SetActive(false);
-
-    //     }
-
-    //     if (controller.value == 1)
-    //     {
-    //         steeringType = SteeringType.Controller;
-    //         canvasK.gameObject.SetActive(false);
-    //         canvasC.gameObject.SetActive(true);
-    //     }
-
-    // }
 
 }
 

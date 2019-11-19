@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Implemented/Scenes/AnimatedLogo.unity
+    guid: e860f26b48f70844f925e3bfc37beab8
+  - enabled: 1
     path: Assets/Implemented/Scenes/Main Menu.unity
     guid: 82ec29595b7435a40a2f53edc845b4f9
   - enabled: 1
@@ -13,19 +16,28 @@ EditorBuildSettings:
     guid: 0836a2a10c284f046b41e72a84c37bfe
   - enabled: 1
     path: Assets/Implemented/Scenes/Level 1.unity
-    guid: edbfd5229c6492b4b8ff78676dfe8b42
+    guid: 6c82848b14338654d870497d51eba174
   - enabled: 1
     path: Assets/Implemented/Scenes/Level 2.unity
-    guid: e0f874a36ef46c346a93f9e7d829bc11
+    guid: bd62a224924e79a4abc4555b2ef39d69
   - enabled: 1
     path: Assets/Implemented/Scenes/Level 3.unity
-    guid: 6838b4629f709224bac8b72d5fdbd3d4
+    guid: 27a79f5f82df5a0469798f6354c778d4
+  - enabled: 0
+    path: Assets/Implemented/Scenes/Level 1 old.unity
+    guid: 8785a1386add9ae44aed236ad4f2cc4b
+  - enabled: 0
+    path: Assets/Implemented/Scenes/Level 2 old.unity
+    guid: 01e776d8da2541941a9738205bcb05ed
+  - enabled: 0
+    path: Assets/Implemented/Scenes/Level 3 old.unity
+    guid: fe4daca8f9e02df4fbd1d4932aacf67e
   - enabled: 1
     path: Assets/Implemented/Scenes/Commander Whipcream.unity
-    guid: 7b0c916c87047ce4dabc01daa612180c
+    guid: 2f747529bbce3d143a0d67258c3ef589
   - enabled: 1
     path: Assets/Implemented/Scenes/Waffle King.unity
-    guid: 95d776320c5cdf54bac3fd6e44a1e30d
+    guid: 7f9c444dfc28d7b4db4a6bf2077ae481
   - enabled: 1
     path: Assets/Implemented/Scenes/Victory.unity
     guid: 22a2b1141ce0cc74a949e3f717cae2bf

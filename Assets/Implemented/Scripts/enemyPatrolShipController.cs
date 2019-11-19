@@ -6,12 +6,12 @@ using UnityEngine;
 public class enemyPatrolShipController : MonoBehaviour
 {
     [SerializeField] Transform[] destinations;
-    [SerializeField] float playerDifferenceX;
-    [SerializeField] float playerDifferenceY;
-    [SerializeField] bool wasChasing;
-    [SerializeField] GameObject leftShootPoint;
-    [SerializeField] GameObject rightShootPoint;
-    [SerializeField] GameObject phaserShot;
+  [HideInInspector]   [SerializeField] float playerDifferenceX;
+   [HideInInspector]  [SerializeField] float playerDifferenceY;
+  [HideInInspector]   [SerializeField] bool wasChasing;
+   [HideInInspector]  [SerializeField] GameObject leftShootPoint;
+  [HideInInspector]   [SerializeField] GameObject rightShootPoint;
+[HideInInspector]     [SerializeField] GameObject phaserShot;
     Vector3[] worldDestinations;
     Vector3 targetPoint;
     [SerializeField] float distThreshold = .02f;
@@ -24,7 +24,7 @@ public class enemyPatrolShipController : MonoBehaviour
     float currentAttackTimer;
     bool patrol = true;
 
-    [SerializeField] float chaseZone;
+   [HideInInspector]  [SerializeField] float chaseZone;
     public bool chasePlayer;
     [SerializeField] float attackRange;
     void OnDrawGizmosSelected()
@@ -128,7 +128,7 @@ public class enemyPatrolShipController : MonoBehaviour
     void Shooting()
     {
         attackTimer += Time.deltaTime;
-        if (playerDifferenceX <= attackRange && playerDifferenceY <= attackRange)
+        if (playerDifferenceX <= attackRange && playerDifferenceY <= attackRange && LevelManger.Instance.canAttackPlayer)
         {
 
             if (attackTimer > currentAttackTimer)

@@ -147,6 +147,30 @@
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Esc",
+                    "type": "Button",
+                    "id": "829c92a4-4a6d-47dc-aa2a-7b7d665c8acb",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Roll_Port",
+                    "type": "Button",
+                    "id": "8f6444e3-5fbc-41c3-a45c-6ec3d81af2bb",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Roll_Starboard",
+                    "type": "Button",
+                    "id": "f2e2783d-df6c-4148-9d7b-a7dae2e6eb65",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -202,6 +226,39 @@
                     "processors": "",
                     "groups": "",
                     "action": "Tab",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "052b75d1-e168-43c4-b8ce-7955d40c660b",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Esc",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4186bdfb-6c27-4393-85d0-68ba13e5e4c0",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Roll_Port",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "89208f72-db1e-4f3b-a5e2-5b5bf43ffaa3",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Roll_Starboard",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

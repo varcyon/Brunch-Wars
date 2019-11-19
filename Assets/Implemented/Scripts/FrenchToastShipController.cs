@@ -5,45 +5,17 @@ using UnityEngine;
 
 public class FrenchToastShipController : MonoBehaviour
 {
-    [SerializeField] Transform[] destinations;
-    [SerializeField] float playerDifferenceX;
-    [SerializeField] float playerDifferenceY;
-    [SerializeField] bool wasChasing;
-    Vector3[] worldDestinations;
+   [HideInInspector]  [SerializeField] float playerDifferenceX;
+  [HideInInspector]   [SerializeField] float playerDifferenceY;
+  [HideInInspector]   [SerializeField] bool wasChasing;
     Vector3 targetPoint;
-    [SerializeField] float distThreshold = .02f;
     [SerializeField] float turnSpeed = 2f;
-    [SerializeField] float Speed = 2f;
-    int numOfWaypoints;
-    int currentWaypoint = 0;
+    [SerializeField] float Speed = 3000f;
     Rigidbody2D rigidbody2D;
-    float attackTimer = 0.5f;
-    float currentAttackTimer;
-    bool patrol = true;
 
     [SerializeField] float chaseZone;
     public bool chasePlayer;
     [SerializeField] float attackRange;
-    void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.cyan;
-        for (int i = 0; i < destinations.Length; i++)
-        {
-            if (i == destinations.Length - 1)
-            {
-                Gizmos.DrawLine(destinations[destinations.Length - 1].position, destinations[0].position);
-            }
-            else
-            {
-                Gizmos.DrawLine(destinations[i].position, destinations[i + 1].position);
-            }
-        }
-
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position, chaseZone);
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, attackRange);
-    }
     void Awake()
     {
         rigidbody2D = GetComponent<Rigidbody2D>();

@@ -160,6 +160,30 @@ public class ShipInput : IInputActionCollection, IDisposable
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Esc"",
+                    ""type"": ""Button"",
+                    ""id"": ""829c92a4-4a6d-47dc-aa2a-7b7d665c8acb"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Roll_Port"",
+                    ""type"": ""Button"",
+                    ""id"": ""8f6444e3-5fbc-41c3-a45c-6ec3d81af2bb"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Roll_Starboard"",
+                    ""type"": ""Button"",
+                    ""id"": ""f2e2783d-df6c-4148-9d7b-a7dae2e6eb65"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -217,6 +241,39 @@ public class ShipInput : IInputActionCollection, IDisposable
                     ""action"": ""Tab"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""052b75d1-e168-43c4-b8ce-7955d40c660b"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Esc"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4186bdfb-6c27-4393-85d0-68ba13e5e4c0"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Roll_Port"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""89208f72-db1e-4f3b-a5e2-5b5bf43ffaa3"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Roll_Starboard"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -237,6 +294,9 @@ public class ShipInput : IInputActionCollection, IDisposable
         m_KMGamePlay_Forward = m_KMGamePlay.FindAction("Forward", throwIfNotFound: true);
         m_KMGamePlay_Point = m_KMGamePlay.FindAction("Point", throwIfNotFound: true);
         m_KMGamePlay_Tab = m_KMGamePlay.FindAction("Tab", throwIfNotFound: true);
+        m_KMGamePlay_Esc = m_KMGamePlay.FindAction("Esc", throwIfNotFound: true);
+        m_KMGamePlay_Roll_Port = m_KMGamePlay.FindAction("Roll_Port", throwIfNotFound: true);
+        m_KMGamePlay_Roll_Starboard = m_KMGamePlay.FindAction("Roll_Starboard", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -356,6 +416,9 @@ public class ShipInput : IInputActionCollection, IDisposable
     private readonly InputAction m_KMGamePlay_Forward;
     private readonly InputAction m_KMGamePlay_Point;
     private readonly InputAction m_KMGamePlay_Tab;
+    private readonly InputAction m_KMGamePlay_Esc;
+    private readonly InputAction m_KMGamePlay_Roll_Port;
+    private readonly InputAction m_KMGamePlay_Roll_Starboard;
     public struct KMGamePlayActions
     {
         private ShipInput m_Wrapper;
@@ -365,6 +428,9 @@ public class ShipInput : IInputActionCollection, IDisposable
         public InputAction @Forward => m_Wrapper.m_KMGamePlay_Forward;
         public InputAction @Point => m_Wrapper.m_KMGamePlay_Point;
         public InputAction @Tab => m_Wrapper.m_KMGamePlay_Tab;
+        public InputAction @Esc => m_Wrapper.m_KMGamePlay_Esc;
+        public InputAction @Roll_Port => m_Wrapper.m_KMGamePlay_Roll_Port;
+        public InputAction @Roll_Starboard => m_Wrapper.m_KMGamePlay_Roll_Starboard;
         public InputActionMap Get() { return m_Wrapper.m_KMGamePlay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -389,6 +455,15 @@ public class ShipInput : IInputActionCollection, IDisposable
                 Tab.started -= m_Wrapper.m_KMGamePlayActionsCallbackInterface.OnTab;
                 Tab.performed -= m_Wrapper.m_KMGamePlayActionsCallbackInterface.OnTab;
                 Tab.canceled -= m_Wrapper.m_KMGamePlayActionsCallbackInterface.OnTab;
+                Esc.started -= m_Wrapper.m_KMGamePlayActionsCallbackInterface.OnEsc;
+                Esc.performed -= m_Wrapper.m_KMGamePlayActionsCallbackInterface.OnEsc;
+                Esc.canceled -= m_Wrapper.m_KMGamePlayActionsCallbackInterface.OnEsc;
+                Roll_Port.started -= m_Wrapper.m_KMGamePlayActionsCallbackInterface.OnRoll_Port;
+                Roll_Port.performed -= m_Wrapper.m_KMGamePlayActionsCallbackInterface.OnRoll_Port;
+                Roll_Port.canceled -= m_Wrapper.m_KMGamePlayActionsCallbackInterface.OnRoll_Port;
+                Roll_Starboard.started -= m_Wrapper.m_KMGamePlayActionsCallbackInterface.OnRoll_Starboard;
+                Roll_Starboard.performed -= m_Wrapper.m_KMGamePlayActionsCallbackInterface.OnRoll_Starboard;
+                Roll_Starboard.canceled -= m_Wrapper.m_KMGamePlayActionsCallbackInterface.OnRoll_Starboard;
             }
             m_Wrapper.m_KMGamePlayActionsCallbackInterface = instance;
             if (instance != null)
@@ -408,6 +483,15 @@ public class ShipInput : IInputActionCollection, IDisposable
                 Tab.started += instance.OnTab;
                 Tab.performed += instance.OnTab;
                 Tab.canceled += instance.OnTab;
+                Esc.started += instance.OnEsc;
+                Esc.performed += instance.OnEsc;
+                Esc.canceled += instance.OnEsc;
+                Roll_Port.started += instance.OnRoll_Port;
+                Roll_Port.performed += instance.OnRoll_Port;
+                Roll_Port.canceled += instance.OnRoll_Port;
+                Roll_Starboard.started += instance.OnRoll_Starboard;
+                Roll_Starboard.performed += instance.OnRoll_Starboard;
+                Roll_Starboard.canceled += instance.OnRoll_Starboard;
             }
         }
     }
@@ -427,5 +511,8 @@ public class ShipInput : IInputActionCollection, IDisposable
         void OnForward(InputAction.CallbackContext context);
         void OnPoint(InputAction.CallbackContext context);
         void OnTab(InputAction.CallbackContext context);
+        void OnEsc(InputAction.CallbackContext context);
+        void OnRoll_Port(InputAction.CallbackContext context);
+        void OnRoll_Starboard(InputAction.CallbackContext context);
     }
 }

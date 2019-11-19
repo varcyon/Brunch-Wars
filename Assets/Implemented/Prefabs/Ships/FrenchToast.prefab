@@ -130,11 +130,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21aeb85a77b25a84b86011988942b98c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destinations: []
   playerDifferenceX: 0
   playerDifferenceY: 0
   wasChasing: 0
-  distThreshold: 0.02
   turnSpeed: 2
   Speed: 1500
   chaseZone: 20
@@ -301,11 +299,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: DestoryedParticals
-      objectReference: {fileID: 0}
-    - target: {fileID: 2836751310468293258, guid: 670c1adadd99017449e4da4a9d3587c5,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2836751310468293263, guid: 670c1adadd99017449e4da4a9d3587c5,
         type: 3}

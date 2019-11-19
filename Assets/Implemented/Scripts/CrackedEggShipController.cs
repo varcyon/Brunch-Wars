@@ -5,27 +5,27 @@ using UnityEngine;
 
 public class CrackedEggShipController : MonoBehaviour
 {
-    [SerializeField]bool attackPlayer;
+   [HideInInspector]  [SerializeField]bool attackPlayer;
     [SerializeField] Transform[] destinations;
-    [SerializeField] float playerDifferenceX;
-    [SerializeField] float playerDifferenceY;
-    [SerializeField] GameObject leftShootPoint;
-    [SerializeField] GameObject rightShootPoint;
-    [SerializeField] GameObject phaserShot;
+   [HideInInspector] [SerializeField] float playerDifferenceX;
+    [HideInInspector] [SerializeField] float playerDifferenceY;
+  [HideInInspector]   [SerializeField] GameObject leftShootPoint;
+   [HideInInspector]  [SerializeField] GameObject rightShootPoint;
+  [HideInInspector]   [SerializeField] GameObject phaserShot;
     Vector3[] worldDestinations;
     Vector3 targetPoint;
-    [SerializeField] float distThreshold = .02f;
-    [SerializeField] float turnSpeed = 2f;
-    [SerializeField] float Speed = 2f;
+   [HideInInspector]  [SerializeField] float distThreshold = .02f;
+   [HideInInspector]  [SerializeField] float turnSpeed = 2f;
+   [HideInInspector]  [SerializeField] float Speed = 2f;
     int numOfWaypoints;
     int currentWaypoint = 0;
     Rigidbody2D rigidbody2D;
     float attackTimer = 0.5f;
     float currentAttackTimer;
     bool patrol = true;
-    [SerializeField] bool wasAttacking;
+  [HideInInspector]   [SerializeField] bool wasAttacking;
 
-    [SerializeField] float chaseZone;
+  [HideInInspector]   [SerializeField] float chaseZone;
     [SerializeField] float attackRange;
     void OnDrawGizmosSelected()
     {
@@ -128,7 +128,7 @@ public class CrackedEggShipController : MonoBehaviour
     void Shooting()
     {
         attackTimer += Time.deltaTime;
-        if (playerDifferenceX <= attackRange && playerDifferenceY <= attackRange)
+        if (playerDifferenceX <= attackRange && playerDifferenceY <= attackRange && LevelManger.Instance.canAttackPlayer)
         {
 
             if (attackTimer > currentAttackTimer)

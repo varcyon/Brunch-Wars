@@ -7,12 +7,12 @@ public class SausageLinkShipController : MonoBehaviour
 {
     public bool attackPlayer;
     [SerializeField] Transform[] destinations;
-    [SerializeField] float playerDifferenceX;
-    [SerializeField] float playerDifferenceY;
-    [SerializeField] GameObject leftShootPoint;
-    [SerializeField] GameObject rightShootPoint;
-    [SerializeField] GameObject MiddleShootPoint;
-    [SerializeField] GameObject phaserShot;
+  [HideInInspector]   [SerializeField] float playerDifferenceX;
+   [HideInInspector]  [SerializeField] float playerDifferenceY;
+  [HideInInspector]   [SerializeField] GameObject leftShootPoint;
+   [HideInInspector]  [SerializeField] GameObject rightShootPoint;
+   [HideInInspector]  [SerializeField] GameObject MiddleShootPoint;
+    [HideInInspector] [SerializeField] GameObject phaserShot;
     Vector3[] worldDestinations;
     Vector3 targetPoint;
     [SerializeField] float distThreshold = .02f;
@@ -24,11 +24,11 @@ public class SausageLinkShipController : MonoBehaviour
     float attackTimer = 0.5f;
     float currentAttackTimer;
     bool patrol = true;
-    [SerializeField] bool wasAttacking;
+   [HideInInspector]  [SerializeField] bool wasAttacking;
 
     [SerializeField] float chaseZone;
     [SerializeField] float attackRange;
-    [SerializeField] bool shotMiddle;
+  [HideInInspector]   [SerializeField] bool shootMiddle;
     public static SausageLinkShipController Instance;
     void OnDrawGizmosSelected()
     {
@@ -132,7 +132,7 @@ public class SausageLinkShipController : MonoBehaviour
     void Shooting()
     {
         attackTimer += Time.deltaTime;
-        if (playerDifferenceX <= attackRange && playerDifferenceY <= attackRange)
+        if (playerDifferenceX <= attackRange && playerDifferenceY <= attackRange && LevelManger.Instance.canAttackPlayer)
         {
 
             if (attackTimer > currentAttackTimer)
@@ -143,7 +143,7 @@ public class SausageLinkShipController : MonoBehaviour
                 es1.transform.Rotate(0f, 0f, -90f);
                 GameObject es2 = Instantiate(phaserShot, rightShootPoint.transform.position, transform.rotation);
                 es2.transform.Rotate(0f, 0f, -90f);
-                if(shotMiddle){
+                if(shootMiddle){
                     GameObject es3 = Instantiate(phaserShot, MiddleShootPoint.transform.position, transform.rotation);
                 es3.transform.Rotate(0f, 0f, -90f);
                 }

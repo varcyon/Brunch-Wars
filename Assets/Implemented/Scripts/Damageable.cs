@@ -10,15 +10,15 @@ public class Damageable : MonoBehaviour
     public int maxHealth = 5;
     public int currentHealth;
     public int health { get { return currentHealth; } }
-    [SerializeField]GameObject parent;
+   [HideInInspector] public GameObject parent;
 
-    public bool recovering;
-    public float recoveryCounter;
+    [HideInInspector]public bool recovering;
+   [HideInInspector] public float recoveryCounter;
     public float recoveryTime = 2;
     Animator animator;
 
 
-    [SerializeField] List<GameObject> deathParticles = new List<GameObject>();
+   [HideInInspector] public List<GameObject> deathParticles = new List<GameObject>();
 
 
 
@@ -64,6 +64,10 @@ public class Damageable : MonoBehaviour
             currentHealth = Mathf.Clamp(currentHealth - amount, 0, maxHealth);
             if (health <= 0)
             {
+                if (gameObject.tag == "Cereal")
+                {
+                    Die();
+                }
                 if (other.gameObject.tag == "EnemyBase")
                 {
                     Die();
@@ -87,10 +91,13 @@ public class Damageable : MonoBehaviour
             }
             if (health <= 0)
             {
+               LevelManger.Instance.playerIsDead = true;
             }
 
         }
     }
+
+    
     public void increaseHealth(int amount)
     {
         currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
